@@ -14,7 +14,7 @@
 #include <wiringPi.h>
 #include <wiringPiI2C.h>
 
-class NavigationPath {
+class I2c_Master {
   public:
   	
 	/**
@@ -35,7 +35,7 @@ class NavigationPath {
 	* @param[in] int device the device id byte
 	* @return todo
 	*/
-	void addToDevices(int device)
+	void addToDevices(int device);
 	
 	/**
 	* @brief writes array of bytes to slave device
@@ -49,7 +49,7 @@ class NavigationPath {
 	* @param[in]  size		size of data array
 	* @return none
 	*/
-	void writeToDevice(int device, char &data, int size);
+	void writeToDevice(int device, uint8_t * data, int size);
 	
 	/**
 	* @brief reads byte array from slave device
@@ -62,7 +62,7 @@ class NavigationPath {
 	* @param[in]  size		size of data array
 	* @return 
 	*/
-	void readFromDevice(int device, uint8_t[] &data, int size);
+	void readFromDevice(int device, uint8_t * data, int size);
 	
-	
+};	
 #endif

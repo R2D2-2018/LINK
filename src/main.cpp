@@ -13,11 +13,12 @@
 int main (int argc, char *argv[])
 {
 	
-	I2c_Master m = new I2c_Master();
-	int deviceId = 0x05;
-	bool available = m.deviceAvailableForParing(0x05);
-	std::cout <<"Is deviceId: "<< deviceId <<"available? " available << "\n";
-	
+	I2c_Master m ;
+	int deviceId = 0x50;
+	bool available = m.deviceAvailableForParing(deviceId);
+	std::cout <<"Is deviceId: "<< deviceId <<" available? "<< available << "\n";
+	char  y;	
+	std::cin >> y;	
 	std::cout << "Response van slave: ";
 	if(available){
 		uint8_t data[5];
@@ -25,10 +26,10 @@ int main (int argc, char *argv[])
 		m.readFromDevice(deviceId,data,5);
 		
 		for(int x = 0; x <5; x++){
-			std::cout << (char)data[x];
+			std::cout << data[x];
 		}
 	}
-
+	std::cout << "\n";
     return 0;
 }
 

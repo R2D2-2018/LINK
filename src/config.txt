@@ -1,0 +1,12 @@
+objdetect reqDistance reqPress
+temperature setInterval setThreshold reqTemp
+navigation reqDirections 
+platform reqMvmnt activateBreak
+mapping lidarData sensorPos
+bluetooth receiveData sendData
+motor selectInterface turnDegrees turnSpeed
+posprediction reqLoc
+time setTime reqTime
+robotarm setPos reqPos
+camera getImage setPref
+distance reqDistance 

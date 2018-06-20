@@ -1,5 +1,6 @@
 #include "wrap-hwlib.hpp"
 #include "uart_bit_banged.hpp"
+#include "hardware_uart.hpp"
 
 template <uint32_t L>
 class DeviceType {
@@ -39,13 +40,11 @@ int main() {
 
     tx.set(1);
 
-    UARTBitBanged uart = { tx, rx, 54 };
-
-    uint8_t dat[] = "Hello world!";
+    HardwareUART hwUart = { 9600, UARTController::ONE };
 
     while (true) {
         hwlib::wait_ms(100);
-        uart << dat;
+        hwUart << "Hello world!";
     }
 
 

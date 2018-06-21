@@ -19,7 +19,7 @@ set (sources ${sources}
 
 # Source Files:
 
-include_directories (lib-slave/)
+include_directories (lib/)
 include_directories (src/)
 
 set (sources ${sources}

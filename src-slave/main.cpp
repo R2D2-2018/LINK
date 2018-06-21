@@ -2,10 +2,12 @@
 
 int main() {
     WDT->WDT_MR = WDT_MR_WDDIS;
-    
+
     hwlib::wait_ms(1000);
 
-    LinkModule::waitForAddress();
+    LinkModule::Slave slave;
 
-    hwlib::cout << "Src-slave hello world!" << hwlib::endl; 
+    slave.waitForAddress();
+
+    hwlib::cout << "Src-slave hello world!" << hwlib::endl;
 }

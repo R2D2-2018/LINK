@@ -1,5 +1,4 @@
 #include "wrap-hwlib.hpp"
-#include "uart_bit_banged.hpp"
 #include "hardware_uart.hpp"
 
 template <uint32_t L>

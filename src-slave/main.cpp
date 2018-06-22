@@ -5,8 +5,9 @@ int main() {
 
     hwlib::wait_ms(1000);
 
-    LinkModule::Slave slave;
+    UARTLib::HardwareUART hwUart = { 9600, UARTLib::UARTController::ONE };
 
+    LinkModule::Slave slave = { hwUart };
     slave.waitForAddress();
 
     hwlib::cout << "Src-slave hello world!" << hwlib::endl;

@@ -1,47 +1,6 @@
 #include "address.hpp"
 
 namespace LinkModule {
-inline bool Address::waitForChar(UARTLib::UARTConnection &os, uint64_t timeoutStamp) {
-    while (!os.char_available()) {
-        if (hwlib::now_us() > timeoutStamp) {
-            return false;
-        }
-    }
-
-    return true;
-}
-
-inline bool Address::waitForHeader(UARTLib::UARTConnection &os, uint64_t timeoutStamp) {
-    unsigned char c;
-
-    while (true) {
-        if (!waitForChar(os, timeoutStamp)) {
-            return false;
-        }
-
-        os >> c;
-
-        if (c == 0x69) {
-            if (!waitForChar(os, timeoutStamp)) {
-                return false;
-            }
-
-            c = 0;
-            os >> c;
-
-            if (c == 0x96) {
-                break;
-            }
-        }
-
-        if (hwlib::now_us() > timeoutStamp) {
-            return false;
-        }
-    }
-
-    return true;
-}
-
 Address::Address() {
 }
 
@@ -76,7 +35,7 @@ bool Address::receive(UARTLib::UARTConnection &is, uint32_t timeoutUs) {
     uint8_t parity;
 
     while (true) {
-        if (!waitForHeader(is, timeoutStamp)) {
+        if (!waitForHeader<0x69, 0x96>(is, timeoutStamp)) {
             return false;
         }
 

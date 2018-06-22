@@ -23,6 +23,7 @@ include_directories (src/)
 
 set (sources ${sources}
     lib/address.cpp
+    lib/frame.cpp
     lib/link_module.cpp
     lib/slave.cpp
 )

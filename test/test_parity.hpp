@@ -55,7 +55,7 @@ TEST_CASE("Parity Bit Calculation Test calculateParity", "[linkmodule][parity]")
         REQUIRE(LinkModule::calculateParity(0b10111000) == 1);
     }
 
-    SECTION("Even parity 10101010") {
+    SECTION("Even parity 10101110") {
         REQUIRE(LinkModule::calculateParity(0b10101110) == 0);
     }
 

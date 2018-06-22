@@ -32,7 +32,7 @@ class Slave {
      * When timed out, a bool is returned signaling
      * the timeout.
      *
-     * @param timeoutUs
+     * @param timeoutUs Microseconds to wait until timeout
      * @return true Address address received
      * @return false Timed out
      */

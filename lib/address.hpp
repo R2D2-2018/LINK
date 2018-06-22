@@ -73,7 +73,7 @@ class Address {
      * the master is expected to receive
      * this message.
      *
-     * @param os
+     * @param os UARTConnection to transmit to
      */
     void confirm(UARTLib::UARTConnection &os);
 

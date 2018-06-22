@@ -49,10 +49,10 @@ Address::Address(uint8_t address) : address(address) {
 }
 
 void Address::broadcast(UARTLib::UARTConnection &os) const {
-    // byte 0 - startbyte
-    // byte 1 - startbyte
-    // byte 2 - broadcastedAddress
-    // byte 3 - parityBits
+    ///< byte 0 - startbyte
+    ///< byte 1 - startbyte
+    ///< byte 2 - broadcastedAddress
+    ///< byte 3 - parityBits
 
     uint8_t parity = 0;
     parity |= calculateParity(0x69);
@@ -66,10 +66,10 @@ void Address::broadcast(UARTLib::UARTConnection &os) const {
 }
 
 bool Address::receive(UARTLib::UARTConnection &is, uint32_t timeoutUs) {
-    // byte 0 - startbyte
-    // byte 1 - startbyte
-    // byte 2 - broadcastedAddress
-    // byte 3 - parityBits
+    ///< byte 0 - startbyte
+    ///< byte 1 - startbyte
+    ///< byte 2 - broadcastedAddress
+    ///< byte 3 - parityBits
 
     uint64_t timeoutStamp = hwlib::now_us() + timeoutUs;
     uint8_t receivedAddress;

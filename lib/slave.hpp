@@ -13,6 +13,8 @@
 namespace LinkModule {
 class Slave {
     UARTLib::UARTConnection &uart;
+    hwlib::pin_in &addressSelect;
+    uint8_t address;
 
   public:
     /**
@@ -20,7 +22,7 @@ class Slave {
      *
      * @param uart UARTConnection to communicate with
      */
-    Slave(UARTLib::UARTConnection &uart);
+    Slave(UARTLib::UARTConnection &uart, hwlib::pin_in &addressSelect);
 
     /**
      * @brief Blocks operations until an address is received
@@ -54,6 +56,10 @@ class Slave {
      */
     template <uint32_t L>
     std::array<Frame, L> pullData(uint32_t timeoutUs);
+
+    uint8_t getAddress() {
+        return address;
+    }
 };
 } // namespace LinkModule
 

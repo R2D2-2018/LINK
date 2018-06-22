@@ -5,6 +5,6 @@
 
 namespace LinkModule {
 class Frame {};
-}
+} // namespace LinkModule
 
 #endif // FRAME_HPP

@@ -76,21 +76,21 @@ bool Address::receive(UARTLib::UARTConnection &is, uint32_t timeoutUs) {
     uint8_t parity;
 
     while (true) {
-        if (!waitForHeader(os, timeoutStamp)) {
+        if (!waitForHeader(is, timeoutStamp)) {
             return false;
         }
 
-        if (!waitForChar(os, timeoutStamp)) {
+        if (!waitForChar(is, timeoutStamp)) {
             return false;
         }
 
-        os >> receivedAddress;
+        is >> receivedAddress;
 
-        if (!waitForChar(os, timeoutStamp)) {
+        if (!waitForChar(is, timeoutStamp)) {
             return false;
         }
 
-        os >> parity;
+        is >> parity;
 
         uint8_t requiredParity = calculateParity(0x69) | calculateParity(0x96) << 1 | calculateParity(receivedAddress) << 2;
 

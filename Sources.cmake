@@ -12,7 +12,6 @@ set (uart_lib ${build_environment}/libraries/UART_LIB)
 include_directories (${uart_lib}/src)
 
 set (sources ${sources}
-    ${uart_lib}/src/hardware_uart.cpp
     ${uart_lib}/src/mock_uart.cpp
     ${uart_lib}/src/uart_connection.cpp
 )
@@ -23,5 +22,7 @@ include_directories (lib/)
 include_directories (src/)
 
 set (sources ${sources}
-
+    lib/address.cpp
+    lib/link_module.cpp
+    lib/slave.cpp
 )

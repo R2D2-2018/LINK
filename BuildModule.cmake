@@ -13,6 +13,7 @@ endif (SRC_SLAVE)
 set (sources ${sources}
     src/wrap-hwlib.cpp
     src/libc-stub.cpp
+    ${uart_lib}/src/hardware_uart.cpp
 )
 
 add_definitions (-DBMPTK_TARGET_arduino_due

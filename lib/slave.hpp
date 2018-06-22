@@ -12,25 +12,25 @@
 
 namespace LinkModule {
 class Slave {
-    UARTLib::UARTConnection& uart;
+    UARTLib::UARTConnection &uart;
 
-public:
+  public:
     /**
      * @brief Construct a new Slave object
-     * 
+     *
      * @param uart UARTConnection to communicate with
      */
-    Slave(UARTLib::UARTConnection& uart);
+    Slave(UARTLib::UARTConnection &uart);
 
     /**
      * @brief Blocks operations until an address is received
-     * 
+     *
      * @details
-     * Blocks operation until an address is received. 
-     * When timed out, a bool is returned signaling 
+     * Blocks operation until an address is received.
+     * When timed out, a bool is returned signaling
      * the timeout.
-     * 
-     * @param timeoutUs 
+     *
+     * @param timeoutUs
      * @return true Address address received
      * @return false Timed out
      */
@@ -38,7 +38,7 @@ public:
 
     /**
      * @brief Not implemented
-     * 
+     *
      * @tparam L Amount of frames to push
      * @param frames Frames to push
      */
@@ -47,7 +47,7 @@ public:
 
     /**
      * @brief Not implemented
-     * 
+     *
      * @tparam L Amount of frames to pull
      * @param timeoutUs Timeout in microseconds
      * @return std::array<Frame, L> Pulled frames

@@ -6,7 +6,7 @@
 namespace LinkModule {
 /**
  * @brief Calculates a parity bit for the provided byte, uses EVEN_PARITY for even or odd parity
- *  
+ *
  * @tparam EVEN_PARITY sets even or odd parity
  * @param b Byte to calculate parity for
  * @return high Parity bit is 1
@@ -25,12 +25,12 @@ constexpr bool _calculateParity(uint8_t b) {
 
 /**
  * @brief Calculates a parity bit for the provided byte
- * 
+ *
  * @details
  * This function is a wrapper for _calculateParity<true>(b)
  * for possible easy re-configruation of the CRC parity.
  * Currently uses even parity.
- * 
+ *
  * @param b Byte to calculate parity for
  * @return high Parity bit is 1
  * @return low Parity bit is 0

@@ -1,7 +1,8 @@
 #include "slave.hpp"
 
 namespace LinkModule {
-Slave::Slave(UARTLib::UARTConnection& uart) : uart(uart) {}
+Slave::Slave(UARTLib::UARTConnection &uart) : uart(uart) {
+}
 
 bool Slave::waitForAddress(uint64_t timeoutUs) {
     Address address = {};
@@ -10,7 +11,7 @@ bool Slave::waitForAddress(uint64_t timeoutUs) {
     hwlib::wait_ms(5);
 
     if (success) {
-        Address confirmationAddress = { address };
+        Address confirmationAddress = {address};
         confirmationAddress.confirm(uart);
         return true; ///< Received address
     } else {

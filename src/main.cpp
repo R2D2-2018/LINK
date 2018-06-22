@@ -8,14 +8,9 @@ int main() {
 
     hwlib::wait_ms(1000);
 
-    UARTLib::HardwareUART hwUart = { 9600, UARTLib::UARTController::ONE };
+    UARTLib::HardwareUART hwUart = {9600, UARTLib::UARTController::ONE};
 
-    LinkModule::Master<1> master = {
-        hwUart,
-        {{
-            {0x01, "Button"}
-        }}
-    };
+    LinkModule::Master<1> master = {hwUart, {{{0x01, "Button"}}}};
 
     master.discoverSlaves();
 

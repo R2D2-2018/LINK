@@ -18,7 +18,7 @@ class DeviceType {
 
     /**
      * @brief Construct a new Device Type object with address and typeStr
-     * 
+     *
      * @param address Address to use
      * @param typeStr Device type name
      */
@@ -27,7 +27,7 @@ class DeviceType {
 
     /**
      * @brief Get the Address device
-     * 
+     *
      * @return uint8_t Address of device
      */
     uint8_t getAddress() {
@@ -36,7 +36,7 @@ class DeviceType {
 
     /**
      * @brief Get the TypeString of device
-     * 
+     *
      * @return const hwlib::string<L>& TypeString of device
      */
     const hwlib::string<L> &getType() {
@@ -44,16 +44,16 @@ class DeviceType {
     }
 
     /**
-     * @brief Writes device in string to OS 
-     * 
+     * @brief Writes device in string to OS
+     *
      * @tparam OS ostream
      * @param os ostream to write to
      * @param device Device to write to os
      * @return OS& ostream
      */
     template <class OS>
-    friend OS& operator << (OS& os, DeviceType<L> device) {
-        return os << (int) device.getAddress() << " : " << device.getType();
+    friend OS &operator<<(OS &os, DeviceType<L> device) {
+        return os << (int)device.getAddress() << " : " << device.getType();
     }
 };
 

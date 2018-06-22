@@ -91,7 +91,7 @@ bool Address::receive(UARTLib::UARTConnection &is, uint32_t timeoutUs) {
         }
 
         os >> parity;
-        
+
         uint8_t requiredParity = calculateParity(0x69) | calculateParity(0x96) << 1 | calculateParity(receivedAddress) << 2;
 
         if (parity == requiredParity) {

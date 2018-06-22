@@ -1,8 +1,9 @@
 #ifndef FRAME_HPP
 #define FRAME_HPP
 
-#include "wrap-hwlib.hpp"
 #include "uart_util.hpp"
+#include "parity.hpp"
+#include "wrap-hwlib.hpp"
 
 namespace LinkModule {
 
@@ -34,13 +35,12 @@ class Package {};
 class Frame {
     uint8_t packageCount;
 
-    void sendHeader(UARTLib::UARTConnection& os);
-    void sendFooter(UARTLib::UARTConnection& os);
-    bool receiveHeader(UARTLib::UARTConnection& is, uint64_t timeoutStamp);
-    bool receiveFooter(UARTLib::UARTConnection& is, uint64_t timeoutStamp);
+    void sendHeader(UARTLib::UARTConnection &os);
+    void sendFooter(UARTLib::UARTConnection &os);
+    bool receiveHeader(UARTLib::UARTConnection &is, uint64_t timeoutStamp);
+    bool receiveFooter(UARTLib::UARTConnection &is, uint64_t timeoutStamp);
 
-public:
-
+  public:
 };
 } // namespace LinkModule
 

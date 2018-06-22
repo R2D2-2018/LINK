@@ -1,6 +1,7 @@
 #include "frame.hpp"
 
-void Frame::sendHeader(UARTLib::UARTConnection& os) {
+namespace LinkModule {
+void Frame::sendHeader(UARTLib::UARTConnection &os) {
     ///< byte 0 - startbyte
     ///< byte 1 - startbyte
     ///< byte 2 - package count
@@ -15,7 +16,7 @@ void Frame::sendHeader(UARTLib::UARTConnection& os) {
     os << parity;
 }
 
-void Frame::sendFooter(UARTLib::UARTConnection& os) {
+void Frame::sendFooter(UARTLib::UARTConnection &os) {
     ///< byte 0 - startbyte
     ///< byte 1 - startbyte
     ///< byte 2 - package count
@@ -30,7 +31,7 @@ void Frame::sendFooter(UARTLib::UARTConnection& os) {
     os << parity;
 }
 
-bool Frame::receiveHeader(UARTLib::UARTConnection& is, uint64_t timeoutStamp) {
+bool Frame::receiveHeader(UARTLib::UARTConnection &is, uint64_t timeoutStamp) {
     uint8_t receivedPackageCount;
     uint8_t parity;
 
@@ -53,7 +54,7 @@ bool Frame::receiveHeader(UARTLib::UARTConnection& is, uint64_t timeoutStamp) {
 
         uint8_t requiredParity = calculateParity(0x37) | calculateParity(0x13) << 1 | calculateParity(packageCount) << 2;
         requiredParity |= calculateParity(0x37) << 7 | calculateParity(0x13) << 6 | calculateParity(packageCount) << 5;
-        
+
         if (parity == requiredParity) {
             packageCount = receivedPackageCount;
             return true;
@@ -63,7 +64,7 @@ bool Frame::receiveHeader(UARTLib::UARTConnection& is, uint64_t timeoutStamp) {
     }
 }
 
-bool Frame::receiveFooter(UARTLib::UARTConnection& is, uint64_t timeoutStamp) {
+bool Frame::receiveFooter(UARTLib::UARTConnection &is, uint64_t timeoutStamp) {
     uint8_t receivedPackageCount;
     uint8_t parity;
 
@@ -86,7 +87,7 @@ bool Frame::receiveFooter(UARTLib::UARTConnection& is, uint64_t timeoutStamp) {
 
         uint8_t requiredParity = calculateParity(0x37) | calculateParity(0x13) << 1 | calculateParity(packageCount) << 2;
         requiredParity |= calculateParity(0x37) << 7 | calculateParity(0x13) << 6 | calculateParity(packageCount) << 5;
-        
+
         if (receivedPackageCount == packageCount && parity == requiredParity) {
             return true;
         } else {
@@ -94,3 +95,4 @@ bool Frame::receiveFooter(UARTLib::UARTConnection& is, uint64_t timeoutStamp) {
         }
     }
 }
+} // namespace LinkModule

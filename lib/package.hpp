@@ -2,9 +2,7 @@
 #define PACKAGE_HPP
 
 namespace LinkModule {
-class Package {
-
-};
+class Package {};
 } // namespace LinkModule
 
 #endif // PACKAGE_HPP

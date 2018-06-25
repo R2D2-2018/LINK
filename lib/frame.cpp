@@ -1,6 +1,10 @@
 #include "frame.hpp"
 
 namespace LinkModule {
+Frame::Frame() : packageCount() {}
+
+Frame::Frame(uint8_t packageCount) : packageCount(packageCount) { }
+
 void Frame::sendHeader(UARTLib::UARTConnection &os) {
     ///< byte 0 - startbyte
     ///< byte 1 - startbyte
@@ -52,8 +56,8 @@ bool Frame::receiveHeader(UARTLib::UARTConnection &is, uint64_t timeoutStamp) {
 
         is >> parity;
 
-        uint8_t requiredParity = calculateParity(0x37) | calculateParity(0x13) << 1 | calculateParity(packageCount) << 2;
-        requiredParity |= calculateParity(0x37) << 7 | calculateParity(0x13) << 6 | calculateParity(packageCount) << 5;
+        uint8_t requiredParity = calculateParity(0x13) | calculateParity(0x37) << 1 | calculateParity(packageCount) << 2;
+        requiredParity |= calculateParity(0x13) << 7 | calculateParity(0x37) << 6 | calculateParity(packageCount) << 5;
 
         if (parity == requiredParity) {
             packageCount = receivedPackageCount;
@@ -85,10 +89,10 @@ bool Frame::receiveFooter(UARTLib::UARTConnection &is, uint64_t timeoutStamp) {
 
         is >> parity;
 
-        uint8_t requiredParity = calculateParity(0x37) | calculateParity(0x13) << 1 | calculateParity(packageCount) << 2;
-        requiredParity |= calculateParity(0x37) << 7 | calculateParity(0x13) << 6 | calculateParity(packageCount) << 5;
+        uint8_t requiredParity = calculateParity(0x37) | calculateParity(0x13) << 1 | calculateParity(receivedPackageCount) << 2;
+        requiredParity |= calculateParity(0x37) << 7 | calculateParity(0x13) << 6 | calculateParity(receivedPackageCount) << 5;
 
-        if (receivedPackageCount == packageCount && parity == requiredParity) {
+        if (parity == requiredParity) {
             return true;
         } else {
             ///< Parity bits incorrect, try again

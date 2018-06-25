@@ -35,12 +35,18 @@ class Package {};
 class Frame {
     uint8_t packageCount;
 
+public:
+    Frame();
+    Frame(uint8_t packageCount);
+
     void sendHeader(UARTLib::UARTConnection &os);
     void sendFooter(UARTLib::UARTConnection &os);
     bool receiveHeader(UARTLib::UARTConnection &is, uint64_t timeoutStamp);
     bool receiveFooter(UARTLib::UARTConnection &is, uint64_t timeoutStamp);
 
-  public:
+    uint8_t getPackageCount() {
+        return packageCount;
+    }
 };
 } // namespace LinkModule
 

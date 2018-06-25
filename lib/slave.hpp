@@ -9,12 +9,14 @@
 #include "frame.hpp"
 #include "parity.hpp"
 #include "uart_lib.hpp"
+#include "object_pool.hpp"
 
 namespace LinkModule {
 class Slave {
     UARTLib::UARTConnection &uart;
     hwlib::pin_in &addressSelect;
     uint8_t address;
+    ObjectPool<Package, 256> packagePool;
 
   public:
     /**
@@ -45,17 +47,44 @@ class Slave {
      * @param frames Frames to push
      */
     template <uint32_t L>
-    void pushData(const std::array<Frame, L> &frames);
+    void pushData(const std::array<Frame, L> &frames)  {
+        ///< No implementation
+    }
 
     /**
      * @brief Not implemented
      *
-     * @tparam L Amount of frames to pull
      * @param timeoutUs Timeout in microseconds
-     * @return std::array<Frame, L> Pulled frames
      */
-    template <uint32_t L>
-    std::array<Frame, L> pullData(uint32_t timeoutUs);
+    Frame pullData(uint64_t timeoutUs) {
+        uint64_t timeoutStamp = hwlib::now_us() + timeoutUs;
+
+        Frame frame;
+
+        if (!frame.receiveHeader(uart, timeoutStamp)) {
+            // hwlib::cout << "Timed out" << hwlib::endl;
+        }
+
+        Package* packages = packagePool.allocateBlocks(frame.getPackageCount());
+
+        if (packages != nullptr) {
+            // hwlib::cout << packagePool << hwlib::endl;
+
+            frame.setPackageBuffer(packages);
+            frame.receivePackages(uart, timeoutStamp);
+            frame.receiveFooter(uart, timeoutStamp);
+
+            for (int i = 0; i < frame.getPackageCount(); i++) {
+                hwlib::cout << hwlib::hex << hwlib::setw(2) << hwlib::setfill('0') << packages[i] << hwlib::endl;
+            }
+
+            packagePool.deallocateBlocks(packages);
+        } else {
+            ///< Pool full
+        }
+
+        return frame;
+    }
 
     uint8_t getAddress() {
         return address;

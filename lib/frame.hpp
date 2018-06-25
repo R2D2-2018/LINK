@@ -4,6 +4,7 @@
 #include "parity.hpp"
 #include "uart_util.hpp"
 #include "wrap-hwlib.hpp"
+#include "package.hpp"
 
 namespace LinkModule {
 
@@ -30,14 +31,14 @@ namespace LinkModule {
 // package count
 // parity byte
 
-class Package {};
-
 class Frame {
+    Package* packageBuffer;
     uint8_t packageCount;
 
   public:
     Frame();
     Frame(uint8_t packageCount);
+    Frame(Package* packageBuffer, uint8_t packageCount);
 
     void sendHeader(UARTLib::UARTConnection &os);
     void sendFooter(UARTLib::UARTConnection &os);
@@ -47,6 +48,9 @@ class Frame {
     uint8_t getPackageCount() {
         return packageCount;
     }
+    void sendPackages(UARTLib::UARTConnection &os);
+    void receivePackages(UARTLib::UARTConnection& is, uint64_t timeoutStamp);
+    void setPackageBuffer(Package* packageBuffer);
 };
 } // namespace LinkModule
 

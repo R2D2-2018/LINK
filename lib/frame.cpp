@@ -7,6 +7,9 @@ Frame::Frame() : packageCount() {
 Frame::Frame(uint8_t packageCount) : packageCount(packageCount) {
 }
 
+Frame::Frame(Package* packageBuffer, uint8_t packageCount) : packageBuffer(packageBuffer), packageCount(packageCount) {
+}
+
 void Frame::sendHeader(UARTLib::UARTConnection &os) {
     ///< byte 0 - startbyte
     ///< byte 1 - startbyte
@@ -100,5 +103,29 @@ bool Frame::receiveFooter(UARTLib::UARTConnection &is, uint64_t timeoutStamp) {
             ///< Parity bits incorrect, try again
         }
     }
+}
+
+void Frame::sendPackages(UARTLib::UARTConnection &os) {
+    Package* package = packageBuffer;
+
+    for (uint8_t i = 0; i < packageCount; i++) {
+        package->sendPackage(os);
+
+        package++;
+    }
+}
+
+void Frame::receivePackages(UARTLib::UARTConnection& is, uint64_t timeoutStamp) {
+    Package* package = packageBuffer;
+
+    for (uint8_t i = 0; i < packageCount; i++) {
+        package->receivePackage(is, timeoutStamp);
+
+        package++;
+    }
+}
+
+void Frame::setPackageBuffer(Package* packageBuffer) {
+    this->packageBuffer = packageBuffer;
 }
 } // namespace LinkModule

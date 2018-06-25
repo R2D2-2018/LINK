@@ -1,9 +1,11 @@
 #include "frame.hpp"
 
 namespace LinkModule {
-Frame::Frame() : packageCount() {}
+Frame::Frame() : packageCount() {
+}
 
-Frame::Frame(uint8_t packageCount) : packageCount(packageCount) { }
+Frame::Frame(uint8_t packageCount) : packageCount(packageCount) {
+}
 
 void Frame::sendHeader(UARTLib::UARTConnection &os) {
     ///< byte 0 - startbyte

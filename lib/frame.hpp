@@ -1,8 +1,8 @@
 #ifndef FRAME_HPP
 #define FRAME_HPP
 
-#include "uart_util.hpp"
 #include "parity.hpp"
+#include "uart_util.hpp"
 #include "wrap-hwlib.hpp"
 
 namespace LinkModule {
@@ -35,7 +35,7 @@ class Package {};
 class Frame {
     uint8_t packageCount;
 
-public:
+  public:
     Frame();
     Frame(uint8_t packageCount);
 

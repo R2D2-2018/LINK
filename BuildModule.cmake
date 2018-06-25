@@ -21,7 +21,8 @@ add_definitions (-DBMPTK_TARGET_arduino_due
                  -DBMPTK_BAUDRATE=19200)
 
 set (cxxflags
-    "-Os"
+    # "-Os" ## PRevents issue regarding undefined memset, dirty fix, shoudl be looked into later
+    "-fno-tree-loop-distribute-patterns" ## Prevents issue regarding undefined memset, dirty fix, should be looked into later
     "-ffunction-sections"
     "-fdata-sections"
     "-fno-exceptions"

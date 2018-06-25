@@ -44,13 +44,10 @@ class Frame {
     void sendFooter(UARTLib::UARTConnection &os);
     bool receiveHeader(UARTLib::UARTConnection &is, uint64_t timeoutStamp);
     bool receiveFooter(UARTLib::UARTConnection &is, uint64_t timeoutStamp);
-
-    uint8_t getPackageCount() {
-        return packageCount;
-    }
     void sendPackages(UARTLib::UARTConnection &os);
     void receivePackages(UARTLib::UARTConnection& is, uint64_t timeoutStamp);
     void setPackageBuffer(Package* packageBuffer);
+    uint8_t getPackageCount();
 };
 } // namespace LinkModule
 

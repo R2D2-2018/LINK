@@ -128,4 +128,8 @@ void Frame::receivePackages(UARTLib::UARTConnection& is, uint64_t timeoutStamp) 
 void Frame::setPackageBuffer(Package* packageBuffer) {
     this->packageBuffer = packageBuffer;
 }
+
+uint8_t Frame::getPackageCount() {
+    return packageCount;
+}
 } // namespace LinkModule

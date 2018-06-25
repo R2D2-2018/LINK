@@ -4,7 +4,10 @@
 #include <array>
 
 #include "address.hpp"
+#include "circular_buffer.hpp"
 #include "device_type.hpp"
+#include "frame.hpp"
+#include "object_pool.hpp"
 #include "uart_lib.hpp"
 
 namespace LinkModule {
@@ -26,6 +29,8 @@ class Master {
     std::array<SlaveDevice, DEVICES_L> devices;
 
   public:
+    CircularBuffer<Frame, 6> frameBuffer;
+
     /**
      * @brief Construct a new Master object
      *
@@ -76,6 +81,27 @@ class Master {
                 }
             }
         }
+    }
+
+    /**
+     * @brief
+     */
+    void transmitBuffer() {
+        while (frameBuffer.size() > 0) {
+            Frame frame = frameBuffer.read();
+
+            hwlib::cout << "transmit" << hwlib::endl;
+
+            frame.sendHeader(uart);
+            frame.sendPackages(uart);
+            frame.sendFooter(uart);
+        }
+    }
+
+    /**
+     * @brief
+     */
+    void receiveBuffer() {
     }
 };
 } // namespace LinkModule

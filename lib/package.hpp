@@ -96,7 +96,7 @@ class SizedPackage {
     template <class OS>
     friend OS &operator<<(OS &os, const SizedPackage &sizedPackage) {
         for (uint8_t d : sizedPackage.data) {
-            os << (int)d;
+            os << static_cast<int>(d);
         }
 
         return os;

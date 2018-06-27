@@ -146,7 +146,7 @@ TEST_CASE("Receive Header") {
         const uint8_t packageCount = 25;
         const uint64_t timeoutStamp = hwlib::now_us() + 10000;
 
-        TestConnection conn = {0x13, 0x37, packageCount, 0x24};
+        TestConnection conn = {0x13, 0x37, packageCount, 0x0};
 
         LinkModule::Frame frame;
         REQUIRE(frame.receiveHeader(conn, timeoutStamp) == true);

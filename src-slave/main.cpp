@@ -31,7 +31,7 @@ int main() {
         }
     }
 
-    hwlib::cout << "Assigned address: " << (int)slave.getAddress() << hwlib::endl;
+    hwlib::cout << "Assigned address: " << static_cast<int>(slave.getAddress()) << hwlib::endl;
 
     // while (true) {
     //     LinkModule::Frame f = slave.pullData(1000000);

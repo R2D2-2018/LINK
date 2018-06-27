@@ -70,7 +70,7 @@ class DeviceType {
      */
     template <class OS>
     friend OS &operator<<(OS &os, DeviceType<L> device) {
-        return os << (int)device.getAddress() << " : " << device.getType();
+        return os << static_cast<int>(device.getAddress()) << " : " << device.getType();
     }
 };
 

@@ -1,3 +1,10 @@
+/**
+ * @file
+ * @brief     Slave class declaration
+ * @author    Julian van Doorn
+ * @license   See LICENSE
+ */
+
 #ifndef SLAVE_HPP
 #define SLAVE_HPP
 
@@ -7,14 +14,24 @@
 
 #include "address.hpp"
 #include "frame.hpp"
+#include "object_pool.hpp"
 #include "parity.hpp"
 #include "uart_lib.hpp"
 
 namespace LinkModule {
+/**
+ * @brief Slave class
+ *
+ * @details
+ * Used for hosting all required resources for communicating
+ * with the master. pushData should be ran periodically in
+ * order to provide other modules with data from this module.
+ */
 class Slave {
     UARTLib::UARTConnection &uart;
     hwlib::pin_in &addressSelect;
     uint8_t address;
+    ObjectPool<Package, 256> packagePool;
 
   public:
     /**
@@ -43,19 +60,32 @@ class Slave {
      *
      * @tparam L Amount of frames to push
      * @param frames Frames to push
+     *
+     * @ingroup Unimplemented
      */
     template <uint32_t L>
-    void pushData(const std::array<Frame, L> &frames);
+    void pushData(const std::array<Frame, L> &frames) {
+        ///< No implementation
+    }
 
     /**
-     * @brief Not implemented
+     * @brief Waits until timeoutUs has passed for all slaves to send their data
      *
-     * @tparam L Amount of frames to pull
+     * @details
+     * Undetermined what a good way is for this method to work.
+     *
+     * How this method eventually should work is as following:
+     * The method waits for the master to receive data targeted
+     * for the slave module. (Using address in header)
+     * Then the method formats the data in a usable manner,
+     * so the module code can react accordingly.
+     *
      * @param timeoutUs Timeout in microseconds
-     * @return std::array<Frame, L> Pulled frames
+     *
+     * @ingroup Untested
+     * @ingroup Unimplemented
      */
-    template <uint32_t L>
-    std::array<Frame, L> pullData(uint32_t timeoutUs);
+    Frame pullData(uint64_t timeoutUs);
 
     uint8_t getAddress() {
         return address;

@@ -1,13 +1,29 @@
+/**
+ * @file
+ * @brief     Master class definition
+ * @author    Julian van Doorn
+ * @license   See LICENSE
+ */
+
 #ifndef MASTER_HPP
 #define MASTER_HPP
 
 #include <array>
 
 #include "address.hpp"
+#include "circular_buffer.hpp"
 #include "device_type.hpp"
+#include "frame.hpp"
+#include "object_pool.hpp"
 #include "uart_lib.hpp"
 
 namespace LinkModule {
+/**
+ * @defgroup Unimplemented
+ * Items in this group are not fully imlemented
+ * and are guaranteed not to work as expected.
+ */
+
 /**
  * @brief Master with slave discovery
  *
@@ -26,6 +42,8 @@ class Master {
     std::array<SlaveDevice, DEVICES_L> devices;
 
   public:
+    CircularBuffer<Frame, 6> frameBuffer;
+
     /**
      * @brief Construct a new Master object
      *
@@ -61,6 +79,7 @@ class Master {
             bool discovered = false;
 
             while (!discovered) {
+                hwlib::cout << "Broadcasting address for " << device << hwlib::endl;
                 ///< Broadcasting address for `device`
 
                 LinkModule::Address address = {device.getAddress()};
@@ -76,6 +95,34 @@ class Master {
                 }
             }
         }
+    }
+
+    /**
+     * @brief Transmits all pulled data to all slaves
+     *
+     * @details
+     * Sends every frame buffered in the "frameBuffer"
+     *
+     * @ingroup Unimplemented
+     */
+    void transmitBuffer() {
+        while (frameBuffer.size() > 0) {
+            Frame frame = frameBuffer.read();
+
+            hwlib::cout << "transmit" << hwlib::endl;
+
+            frame.sendHeader(uart);
+            frame.sendPackages(uart);
+            frame.sendFooter(uart);
+        }
+    }
+
+    /**
+     * @brief Blocks until all data from all slaves has been received
+     *
+     * @ingroup Unimplemented
+     */
+    void receiveBuffer() {
     }
 };
 } // namespace LinkModule

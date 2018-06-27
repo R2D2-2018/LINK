@@ -1,3 +1,10 @@
+/**
+ * @file
+ * @brief     Address class declaration
+ * @author    Julian van Doorn
+ * @license   See LICENSE
+ */
+
 #ifndef ADDRESS_HPP
 #define ADDRESS_HPP
 
@@ -5,6 +12,7 @@
 #include "wrap-hwlib.hpp"
 
 #include "parity.hpp"
+#include "uart_util.hpp"
 
 namespace LinkModule {
 /**
@@ -18,10 +26,6 @@ namespace LinkModule {
  */
 class Address {
     uint8_t address;
-
-    inline bool waitForChar(UARTLib::UARTConnection &os, uint64_t timeoutStamp);
-
-    inline bool waitForHeader(UARTLib::UARTConnection &os, uint64_t timeoutStamp);
 
   public:
     /**

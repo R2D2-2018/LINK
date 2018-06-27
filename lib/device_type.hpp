@@ -1,9 +1,26 @@
+/**
+ * @file
+ * @brief     DeviceType class definition
+ * @author    Julian van Doorn
+ * @license   See LICENSE
+ */
+
 #ifndef DEVICE_TYPE_HPP
 #define DEVICE_TYPE_HPP
 
 #include "wrap-hwlib.hpp"
 
 namespace LinkModule {
+/**
+ * @brief DeviceType descriptor class
+ *
+ * @details
+ * Used for describing the type of devices connected
+ * to the link module. It is provided an address and a typeStr to
+ * identify the module.
+ *
+ * @tparam L Amount of slave modules
+ */
 template <uint32_t L>
 class DeviceType {
     uint8_t address;

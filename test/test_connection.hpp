@@ -1,3 +1,10 @@
+/**
+ * @file
+ * @brief     TestConnection class definition
+ * @author    Julian van Doorn
+ * @license   See LICENSE
+ */
+
 #ifndef TEST_CONNECTION_HPP
 #define TEST_CONNECTION_HPP
 

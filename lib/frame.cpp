@@ -1,3 +1,10 @@
+/**
+ * @file
+ * @brief     Frame class definition
+ * @author    Julian van Doorn
+ * @license   See LICENSE
+ */
+
 #include "frame.hpp"
 
 namespace LinkModule {
@@ -7,7 +14,7 @@ Frame::Frame() : packageCount() {
 Frame::Frame(uint8_t packageCount) : packageCount(packageCount) {
 }
 
-Frame::Frame(Package* packageBuffer, uint8_t packageCount) : packageBuffer(packageBuffer), packageCount(packageCount) {
+Frame::Frame(Package *packageBuffer, uint8_t packageCount) : packageBuffer(packageBuffer), packageCount(packageCount) {
 }
 
 void Frame::sendHeader(UARTLib::UARTConnection &os) {
@@ -106,7 +113,7 @@ bool Frame::receiveFooter(UARTLib::UARTConnection &is, uint64_t timeoutStamp) {
 }
 
 void Frame::sendPackages(UARTLib::UARTConnection &os) {
-    Package* package = packageBuffer;
+    Package *package = packageBuffer;
 
     for (uint8_t i = 0; i < packageCount; i++) {
         package->sendPackage(os);
@@ -115,8 +122,8 @@ void Frame::sendPackages(UARTLib::UARTConnection &os) {
     }
 }
 
-void Frame::receivePackages(UARTLib::UARTConnection& is, uint64_t timeoutStamp) {
-    Package* package = packageBuffer;
+void Frame::receivePackages(UARTLib::UARTConnection &is, uint64_t timeoutStamp) {
+    Package *package = packageBuffer;
 
     for (uint8_t i = 0; i < packageCount; i++) {
         package->receivePackage(is, timeoutStamp);
@@ -125,7 +132,7 @@ void Frame::receivePackages(UARTLib::UARTConnection& is, uint64_t timeoutStamp) 
     }
 }
 
-void Frame::setPackageBuffer(Package* packageBuffer) {
+void Frame::setPackageBuffer(Package *packageBuffer) {
     this->packageBuffer = packageBuffer;
 }
 

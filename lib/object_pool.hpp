@@ -1,3 +1,10 @@
+/**
+ * @file
+ * @brief     ObjectPool class definition
+ * @author    Julian van Doorn
+ * @license   See LICENSE
+ */
+
 #ifndef OBJECT_POOL_HPP
 #define OBJECT_POOL_HPP
 

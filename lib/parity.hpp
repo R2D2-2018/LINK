@@ -1,3 +1,10 @@
+/**
+ * @file
+ * @brief     Parity function definitions
+ * @author    Julian van Doorn
+ * @license   See LICENSE
+ */
+
 #ifndef PARITY_HPP
 #define PARITY_HPP
 

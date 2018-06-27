@@ -1,3 +1,10 @@
+/**
+ * @file
+ * @brief     Slave class definition
+ * @author    Julian van Doorn
+ * @license   See LICENSE
+ */
+
 #include "slave.hpp"
 
 namespace LinkModule {
@@ -23,4 +30,35 @@ bool Slave::waitForAddress(uint64_t timeoutUs) {
         }
     }
 }
+
+Frame Slave::pullData(uint64_t timeoutUs) {
+    uint64_t timeoutStamp = hwlib::now_us() + timeoutUs;
+
+    Frame frame;
+
+    if (!frame.receiveHeader(uart, timeoutStamp)) {
+        // hwlib::cout << "Timed out" << hwlib::endl;
+    }
+
+    Package *packages = packagePool.allocateBlocks(frame.getPackageCount());
+
+    if (packages != nullptr) {
+        // hwlib::cout << packagePool << hwlib::endl;
+
+        frame.setPackageBuffer(packages);
+        frame.receivePackages(uart, timeoutStamp);
+        frame.receiveFooter(uart, timeoutStamp);
+
+        for (int i = 0; i < frame.getPackageCount(); i++) {
+            hwlib::cout << hwlib::hex << hwlib::setw(2) << hwlib::setfill('0') << packages[i] << hwlib::endl;
+        }
+
+        packagePool.deallocateBlocks(packages);
+    } else {
+        ///< Pool full
+    }
+
+    return frame;
+}
+
 } // namespace LinkModule

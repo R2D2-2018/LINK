@@ -1,3 +1,10 @@
+/**
+ * @file
+ * @brief     Master class definition
+ * @author    Julian van Doorn
+ * @license   See LICENSE
+ */
+
 #ifndef MASTER_HPP
 #define MASTER_HPP
 
@@ -11,6 +18,12 @@
 #include "uart_lib.hpp"
 
 namespace LinkModule {
+/**
+ * @defgroup Unimplemented
+ * Items in this group are not fully imlemented
+ * and are guaranteed not to work as expected.
+ */
+
 /**
  * @brief Master with slave discovery
  *
@@ -66,6 +79,7 @@ class Master {
             bool discovered = false;
 
             while (!discovered) {
+                hwlib::cout << "Broadcasting address for " << device << hwlib::endl;
                 ///< Broadcasting address for `device`
 
                 LinkModule::Address address = {device.getAddress()};
@@ -84,7 +98,12 @@ class Master {
     }
 
     /**
-     * @brief
+     * @brief Transmits all pulled data to all slaves
+     *
+     * @details
+     * Sends every frame buffered in the "frameBuffer"
+     *
+     * @ingroup Unimplemented
      */
     void transmitBuffer() {
         while (frameBuffer.size() > 0) {
@@ -99,7 +118,9 @@ class Master {
     }
 
     /**
-     * @brief
+     * @brief Blocks until all data from all slaves has been received
+     *
+     * @ingroup Unimplemented
      */
     void receiveBuffer() {
     }

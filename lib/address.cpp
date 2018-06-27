@@ -1,3 +1,10 @@
+/**
+ * @file
+ * @brief     Address class defintion
+ * @author    Julian van Doorn
+ * @license   See LICENSE
+ */
+
 #include "address.hpp"
 
 namespace LinkModule {

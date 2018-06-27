@@ -1,3 +1,10 @@
+/**
+ * @file
+ * @brief     Parity Test Cases
+ * @author    Julian van Doorn
+ * @license   See LICENSE
+ */
+
 #ifndef TEST_PARITY_HPP
 #define TEST_PARITY_HPP
 

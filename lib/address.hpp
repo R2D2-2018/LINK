@@ -1,3 +1,10 @@
+/**
+ * @file
+ * @brief     Address class declaration
+ * @author    Julian van Doorn
+ * @license   See LICENSE
+ */
+
 #ifndef ADDRESS_HPP
 #define ADDRESS_HPP
 

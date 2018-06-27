@@ -1,3 +1,10 @@
+/**
+ * @file
+ * @brief     Frame Test Cases
+ * @author    Julian van Doorn
+ * @license   See LICENSE
+ */
+
 #ifndef TEST_FRAME_HPP
 #define TEST_FRAME_HPP
 
